@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+
 import './App.css';
 
-function App() {
+const App = () => {
+
+  const APP_ID ='697c2c87'
+  const APP_KEY = '26985e81fbdff8fdd13ae40f7a0e1601'
+
+  const request = `https://api.edamam.com/search?q=chicken&app_id=${APP_ID}&app_key=${APP_KEY}`
+
+  useEffect(() => {
+    getRecipes()
+  },)
+
+  const getRecipes = async () => {
+    const response = await fetch(request)
+    const data = await response.json()
+    console.log(data)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form className="search-form">
+        <input className="search-bar" />
+        <button className="search-button" type="submit"> Search </button>
+      </form>
     </div>
   );
 }
